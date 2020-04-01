@@ -9,7 +9,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "wwwroot", "wwwroot", "{7B55
 	ProjectSection(SolutionItems) = preProject
 		wwwroot\index.html = wwwroot\index.html
 		wwwroot\styles.css = wwwroot\styles.css
-		wwwroot\styles.less = wwwroot\styles.less
 		wwwroot\styles.min.css = wwwroot\styles.min.css
 	EndProjectSection
 EndProject
