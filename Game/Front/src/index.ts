@@ -1,1 +1,1 @@
-console.log("index log");
+console.log("index log dupa");
