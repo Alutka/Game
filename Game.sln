@@ -5,18 +5,6 @@ VisualStudioVersion = 16.0.29519.87
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Game", "Game\Game.csproj", "{BD8F29BD-F365-425C-A8AF-6E359CBEE457}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "wwwroot", "wwwroot", "{7B557CEF-5B73-4AFD-BC69-FC047193DB93}"
-	ProjectSection(SolutionItems) = preProject
-		wwwroot\index.html = wwwroot\index.html
-		wwwroot\styles.css = wwwroot\styles.css
-		wwwroot\styles.min.css = wwwroot\styles.min.css
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dist", "dist", "{65936661-A7F7-4BA1-9117-A9BCF5159975}"
-	ProjectSection(SolutionItems) = preProject
-		wwwroot\dist\index.js = wwwroot\dist\index.js
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,9 +18,6 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{65936661-A7F7-4BA1-9117-A9BCF5159975} = {7B557CEF-5B73-4AFD-BC69-FC047193DB93}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2B363282-D17E-4EDE-837B-592BCE9A1184}

@@ -6,13 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="wwwroot\**" />
-    <Content Remove="wwwroot\**" />
-    <EmbeddedResource Remove="wwwroot\**" />
-    <None Remove="wwwroot\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Remove="compilerconfig.json" />
   </ItemGroup>
 
@@ -24,6 +17,14 @@
 
   <ItemGroup>
     <None Include="compilerconfig.json" />
+    <None Include="wwwroot\dist\index.js" />
+    <None Include="wwwroot\index.html" />
+    <None Include="wwwroot\styles.css" />
+    <None Include="wwwroot\styles.min.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Front\" />
   </ItemGroup>
 
 </Project>
