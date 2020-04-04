@@ -35,6 +35,10 @@
     <ProjectReference Include="..\StaticFilesIO\StaticFilesIO.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="..\globalsettings.json" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
     <TypeScriptTarget>ES5</TypeScriptTarget>
     <TypeScriptJSXEmit>React</TypeScriptJSXEmit>
