@@ -1,7 +1,8 @@
 {
   "globalConfig": {
     "storagePaths": {
-      "static": "..\\Static"
+      "static": "..\\Static",
+      "devStatic": "..\\DevStatic"
     },
     "mapExtension": ".map"
   },

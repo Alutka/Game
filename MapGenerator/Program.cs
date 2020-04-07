@@ -2,11 +2,14 @@
 
 namespace MapGenerator
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Startup.LoadConfiguration();
+            var reader = new PNGMapReader("biomes");
+            var dupa = reader.ReadMap();
+            Console.ReadLine();
         }
     }
 }
