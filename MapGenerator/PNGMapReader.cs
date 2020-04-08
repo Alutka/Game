@@ -30,9 +30,9 @@ namespace MapGenerator
             foreach (var layer in layerNames)
             {
                 AbstractLayerHeader header = ReadLayerHeader(layer);
-                Type t = header.GetType();
+                Type headerType = header.GetType();
                 Type generic = typeof(PNGMapLayerReader<>);
-                Type enumType = t.GetGenericArguments()[0];
+                Type enumType = headerType.GetGenericArguments()[0];
                 Type readerType = generic.MakeGenericType(enumType);
                 var layerReader = Activator.CreateInstance(readerType, layer, _mapDirectory, header) as AbstractPNGMapLayerReader;
                 if (height == -1)
