@@ -7,7 +7,7 @@ namespace MapGenerator
         private static void Main(string[] args)
         {
             Startup.LoadConfiguration();
-            var reader = new PNGMapReader("biomes");
+            var reader = new PNGMapReader("DefaultMap");
             var dupa = reader.ReadMap();
             Console.ReadLine();
         }

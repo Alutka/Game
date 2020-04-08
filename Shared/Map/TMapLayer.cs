@@ -2,7 +2,7 @@
 {
     public struct TMapLayer
     {
-        public string LayerName { get; set; }
+        public string Name { get; set; }
         public int[] Values { get; set; }
     }
 }
