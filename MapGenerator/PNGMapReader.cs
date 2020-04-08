@@ -29,21 +29,24 @@ namespace MapGenerator
             IEnumerable<string> layerNames = Directory.GetFiles(_mapDirectory).Select(name => Path.GetFileNameWithoutExtension(name)).Distinct();
             foreach (var layer in layerNames)
             {
-                var dupa = ReadLayerHeader(layer);
-                //    var layerReader = new PNGMapLayerReader(layer, _mapDirectory);
-                //    if (height == -1)
-                //    {
-                //        height = layerReader.GetHeight();
-                //        width = layerReader.GetWidth();
-                //    }
-                //    if (height != layerReader.GetHeight() || width != layerReader.GetWidth())
-                //    {
-                //        throw new InvalidDataException($"Map {_mapName} contains layers of different sizes!");
-                //    }
-                //    mapLayers.Add(layerReader.ReadLayer());
+                AbstractLayerHeader header = ReadLayerHeader(layer);
+                Type t = header.GetType();
+                Type generic = typeof(PNGMapLayerReader<>);
+                Type enumType = t.GetGenericArguments()[0];
+                Type readerType = generic.MakeGenericType(enumType);
+                var layerReader = Activator.CreateInstance(readerType, layer, _mapDirectory, header) as AbstractPNGMapLayerReader;
+                if (height == -1)
+                {
+                    height = layerReader.GetHeight();
+                    width = layerReader.GetWidth();
+                }
+                if (height != layerReader.GetHeight() || width != layerReader.GetWidth())
+                {
+                    throw new InvalidDataException($"Map {_mapName} contains layers of different sizes!");
+                }
+                mapLayers.Add(layerReader.ReadLayer());
             }
-            //return new TMap() { Name = _mapName, Width = width, Height = height, Layers = mapLayers.ToArray() };
-            return new TMap();
+            return new TMap() { Name = _mapName, Width = width, Height = height, Layers = mapLayers.ToArray() };
         }
 
         private AbstractLayerHeader ReadLayerHeader(string layerName)
