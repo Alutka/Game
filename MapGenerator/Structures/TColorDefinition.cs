@@ -1,8 +1,8 @@
 ﻿namespace MapGenerator.Structures
 {
-    public struct TColorDefinition<T>
+    public struct TColorDefinition
     {
-        public T Type { get; set; }
+        public string Type { get; set; }
         public TColor Color { get; set; }
     }
 }

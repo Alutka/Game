@@ -2,6 +2,8 @@
 using Newtonsoft.Json;
 using Shared.Configuration;
 using Shared.Map;
+using Shared.Structures;
+using StaticFilesIO;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -14,9 +16,12 @@ namespace MapGenerator
         private const string HEADER_EXTENSION = ".json";
         private readonly string _mapName;
         private readonly string _mapDirectory;
+        private readonly Dictionary<string, TDefinition> _definitions;
 
         public PNGMapReader(string mapName)
         {
+            var definitionsReader = new DefinitionsReader(Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, ConfigurationInstance.Config.StoragePaths.Static, ConfigurationInstance.Config.StoragePaths.Definitions));
+            _definitions = definitionsReader.ReadDefinitions();
             _mapName = mapName;
             _mapDirectory = Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, ConfigurationInstance.Config.StoragePaths.DevStatic, _mapName);
         }
@@ -29,12 +34,8 @@ namespace MapGenerator
             IEnumerable<string> layerNames = Directory.GetFiles(_mapDirectory).Select(name => Path.GetFileNameWithoutExtension(name)).Distinct();
             foreach (var layer in layerNames)
             {
-                AbstractLayerHeader header = ReadLayerHeader(layer);
-                Type headerType = header.GetType();
-                Type generic = typeof(PNGMapLayerReader<>);
-                Type enumType = headerType.GetGenericArguments()[0];
-                Type readerType = generic.MakeGenericType(enumType);
-                var layerReader = Activator.CreateInstance(readerType, layer, _mapDirectory, header) as AbstractPNGMapLayerReader;
+                TMapLayerHeader header = ReadLayerHeader(layer);
+                var layerReader = new PNGMapLayerReader(layer, _mapDirectory, header, _definitions[header.Type]);
                 if (height == -1)
                 {
                     height = layerReader.GetHeight();
@@ -49,12 +50,12 @@ namespace MapGenerator
             return new TMap() { Name = _mapName, Width = width, Height = height, Layers = mapLayers.ToArray() };
         }
 
-        private AbstractLayerHeader ReadLayerHeader(string layerName)
+        private TMapLayerHeader ReadLayerHeader(string layerName)
         {
             using (StreamReader r = new StreamReader(Path.Combine(_mapDirectory, layerName + HEADER_EXTENSION)))
             {
                 string json = r.ReadToEnd();
-                return JsonConvert.DeserializeObject<AbstractLayerHeader>(json);
+                return JsonConvert.DeserializeObject<TMapLayerHeader>(json);
             }
         }
     }

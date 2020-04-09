@@ -4,5 +4,6 @@
     {
         public string Static { get; set; }
         public string DevStatic { get; set; }
+        public string Definitions { get; set; }
     }
 }

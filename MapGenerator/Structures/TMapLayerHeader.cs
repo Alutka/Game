@@ -1,7 +1,8 @@
 ﻿namespace MapGenerator.Structures
 {
-    public class TMapLayerHeader<T> : AbstractLayerHeader
+    public class TMapLayerHeader
     {
-        public TColorDefinition<T>[] Colors { get; set; }
+        public string Type { get; set; }
+        public TColorDefinition[] Colors { get; set; }
     }
 }
