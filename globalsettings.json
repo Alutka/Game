@@ -1,0 +1,28 @@
+{
+  "globalConfig": {
+    "storagePaths": {
+      "static": "..\\Static",
+      "devStatic": "..\\DevStatic"
+    },
+    "mapExtension": ".map"
+  },
+  "swaggerConfig": {
+    "version": "v1",
+    "title": "API",
+    "endpointUrl": "/swagger/v1/swagger.json"
+  },
+  "ipRateLimiting": {
+    "enableEndpointRateLimiting": false,
+    "stackBlockedRequests": false,
+    "realIpHeader": "X-Real-IP",
+    "clientIdHeader": "X-ClientId",
+    "httpStatusCode": 429,
+    "generalRules": [
+      {
+        "endpoint": "*",
+        "period": "1s",
+        "limit": 100
+      }
+    ]
+  }
+}
