@@ -7,14 +7,14 @@ namespace StaticFilesIO
 {
     public class DefinitionsReader
     {
-        private string _definitionsDirectory;
+        private readonly string _definitionsDirectory;
 
         public DefinitionsReader(string definitionsDirectoryPath)
         {
             _definitionsDirectory = definitionsDirectoryPath;
         }
 
-        public Dictionary<string, TDefinition> ReadDefinitions()
+        public Dictionary<string, TDefinition> Import()
         {
             var result = new Dictionary<string, TDefinition>();
             IEnumerable<string> definitions = Directory.GetFiles(_definitionsDirectory);
@@ -24,7 +24,8 @@ namespace StaticFilesIO
                 {
                     string json = r.ReadToEnd();
                     var jsonResult = JsonConvert.DeserializeObject<string[]>(json);
-                    result.Add(Path.GetFileNameWithoutExtension(definition), new TDefinition(jsonResult));
+                    string definitionName = Path.GetFileNameWithoutExtension(definition);
+                    result.Add(definitionName, new TDefinition(definitionName, jsonResult));
                 }
             }
             return result;
