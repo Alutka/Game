@@ -3,8 +3,8 @@ using Newtonsoft.Json;
 using Shared.Configuration;
 using Shared.Map;
 using Shared.Structures;
+using Shared.Utils;
 using StaticFilesIO;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -20,10 +20,10 @@ namespace MapGenerator
 
         public PNGMapReader(string mapName)
         {
-            var definitionsReader = new DefinitionsReader(Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, ConfigurationInstance.Config.StoragePaths.Static, ConfigurationInstance.Config.StoragePaths.Definitions));
+            var definitionsReader = new DefinitionsReader(PathUtils.GetPath(Path.Combine(ConfigurationInstance.Config.StoragePaths.Static, ConfigurationInstance.Config.StoragePaths.Definitions)));
             _definitions = definitionsReader.Import();
             _mapName = mapName;
-            _mapDirectory = Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, ConfigurationInstance.Config.StoragePaths.DevStatic, _mapName);
+            _mapDirectory = PathUtils.GetPath(Path.Combine(ConfigurationInstance.Config.StoragePaths.DevStatic, _mapName));
         }
 
         public TMap ReadMap()

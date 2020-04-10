@@ -3,9 +3,10 @@
     "storagePaths": {
       "static": "..\\Static",
       "devStatic": "..\\DevStatic",
-      "definitions": "Definitions"
+      "definitions": "Definitions",
+      "maps": "maps"
     },
-    "mapExtension": ".map"
+    "mapExtension": ".gmap"
   },
   "swaggerConfig": {
     "version": "v1",

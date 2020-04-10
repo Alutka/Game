@@ -11,7 +11,6 @@ namespace MapGenerator
     public class PNGMapLayerReader
     {
         private const string PNG_EXTENSION = ".png";
-        private readonly string _layerName;
         private readonly string _layerType;
         private readonly string _path;
         private readonly Bitmap _bitmap;
@@ -20,9 +19,8 @@ namespace MapGenerator
 
         public PNGMapLayerReader(string layerName, string directoryPath, TMapLayerHeader header, TDefinition definition)
         {
-            _layerName = layerName;
-            _path = Path.Combine(directoryPath, layerName);
-            _bitmap = new Bitmap(_path + PNG_EXTENSION, true);
+            _path = Path.Combine(directoryPath, layerName + PNG_EXTENSION);
+            _bitmap = new Bitmap(_path, true);
             _definition = definition;
             _header = header.Colors.ToDictionary(col => col.Color, col => col.Type);
             _layerType = header.Type;
