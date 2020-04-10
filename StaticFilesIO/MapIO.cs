@@ -1,4 +1,5 @@
-﻿using Shared.Map;
+﻿using Shared.Configuration;
+using Shared.Map;
 using System.IO;
 
 namespace StaticFilesIO
@@ -8,10 +9,10 @@ namespace StaticFilesIO
         private readonly string _mapDirectory;
         private readonly string _mapExtension;
 
-        public MapIO(string mapDirectoryPath, string mapExtension)
+        public MapIO()
         {
-            _mapDirectory = mapDirectoryPath;
-            _mapExtension = mapExtension;
+            _mapDirectory = Path.Combine(ConfigurationInstance.Config.StoragePaths.Static, ConfigurationInstance.Config.StoragePaths.Maps);
+            _mapExtension = ConfigurationInstance.Config.MapExtension;
         }
 
         public void Export(TMap map)

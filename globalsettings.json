@@ -6,7 +6,8 @@
       "definitions": "Definitions",
       "maps": "maps"
     },
-    "mapExtension": ".gmap"
+    "mapExtension": ".gmap",
+    "defaultMapName": "DefaultMap"
   },
   "swaggerConfig": {
     "version": "v1",

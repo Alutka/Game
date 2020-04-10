@@ -1,9 +1,6 @@
-﻿using Shared.Configuration;
-using Shared.Map;
-using Shared.Utils;
+﻿using Shared.Map;
 using StaticFilesIO;
 using System;
-using System.IO;
 
 namespace MapGenerator
 {
@@ -14,8 +11,7 @@ namespace MapGenerator
             Startup.LoadConfiguration();
             var reader = new PNGMapReader("DefaultMap");
             TMap map = reader.ReadMap();
-            string mapFolder = PathUtils.GetPath(Path.Combine(ConfigurationInstance.Config.StoragePaths.Static, ConfigurationInstance.Config.StoragePaths.Maps));
-            var mapIO = new MapIO(mapFolder, ConfigurationInstance.Config.MapExtension);
+            var mapIO = new MapIO();
             mapIO.Export(map);
             Console.WriteLine("Map generated!");
         }
