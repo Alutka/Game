@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Shared.Map;
+using StaticFilesIO;
+using System;
 
 namespace MapGenerator
 {
@@ -8,8 +10,10 @@ namespace MapGenerator
         {
             Startup.LoadConfiguration();
             var reader = new PNGMapReader("DefaultMap");
-            var dupa = reader.ReadMap();
-            Console.ReadLine();
+            TMap map = reader.ReadMap();
+            var mapIO = new MapIO();
+            mapIO.Export(map);
+            Console.WriteLine("Map generated!");
         }
     }
 }

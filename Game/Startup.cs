@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Game.Interfaces;
+using Game.Map;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -21,6 +23,8 @@ namespace Game
             ConfigurationInstance.Config = _configuration.GetSection("globalConfig").Get<TConfig>();
             ConfigurationInstance.SwaggerConfig = _configuration.GetSection("swaggerConfig").Get<TSwaggerConfig>();
 
+            services.AddSingleton<IMapService, MapService>();
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddCors(options =>
@@ -34,7 +38,7 @@ namespace Game
             });
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IMapService mapService)
         {
             if (env.IsDevelopment())
             {
@@ -45,6 +49,8 @@ namespace Game
             app.UseStaticFiles();
             app.UseHttpsRedirection();
             app.UseMvc();
+
+            mapService.Import();
         }
     }
 }

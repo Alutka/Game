@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Shared.Configuration;
+using System;
+using System.IO;
 
 namespace MapGenerator
 {
@@ -12,6 +14,7 @@ namespace MapGenerator
                             .Build();
 
             ConfigurationInstance.Config = config.GetSection("globalConfig").Get<TConfig>();
+            Directory.SetCurrentDirectory(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName);
         }
     }
 }

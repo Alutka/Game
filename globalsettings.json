@@ -2,9 +2,12 @@
   "globalConfig": {
     "storagePaths": {
       "static": "..\\Static",
-      "devStatic": "..\\DevStatic"
+      "devStatic": "..\\DevStatic",
+      "definitions": "Definitions",
+      "maps": "maps"
     },
-    "mapExtension": ".map"
+    "mapExtension": ".gmap",
+    "defaultMapName": "DefaultMap"
   },
   "swaggerConfig": {
     "version": "v1",
