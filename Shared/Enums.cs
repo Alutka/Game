@@ -1,10 +1,7 @@
 ﻿namespace Shared
 {
-    public enum Biome
+    public enum DefinitionType
     {
-        Mountains,
-        Forest,
-        Grassland,
-        Desert
+        Biome,
     }
 }

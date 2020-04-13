@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
+using Shared;
 using Shared.Configuration;
-using Shared.Structures;
+using Shared.Definitions;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -16,21 +17,22 @@ namespace StaticFilesIO
             _definitionsDirectory = Path.Combine(ConfigurationInstance.Config.StoragePaths.Static, ConfigurationInstance.Config.StoragePaths.Definitions);
         }
 
-        public Dictionary<string, TDefinition> Import()
+        public TStaticDefinitions Import()
         {
-            var result = new Dictionary<string, TDefinition>();
             IEnumerable<string> definitions = Directory.GetFiles(_definitionsDirectory).Select(filePath => Path.GetFileName(filePath));
+            var result = new List<AbstractDefinitionSet>();
             foreach (var definition in definitions)
             {
                 using (StreamReader r = new StreamReader(Path.Combine(_definitionsDirectory, definition)))
                 {
                     string json = r.ReadToEnd();
-                    var jsonResult = JsonConvert.DeserializeObject<string[]>(json);
-                    string definitionName = Path.GetFileNameWithoutExtension(definition);
-                    result.Add(definitionName, new TDefinition(definitionName, jsonResult));
+                    result.Add(JsonConvert.DeserializeObject<AbstractDefinitionSet>(json));
                 }
             }
-            return result;
+            return new TStaticDefinitions()
+            {
+                Biomes = result.First(def => def.Type == DefinitionType.Biome) as TDefinitionSet<TBiome>
+            };
         }
     }
 }
