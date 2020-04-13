@@ -1,4 +1,5 @@
 {
+    "$schema": "../Schemas/biomesSchema.json",
     "type" : "Biome",
     "items": [
         {

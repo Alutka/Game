@@ -6,5 +6,6 @@
         public string DevStatic { get; set; }
         public string Definitions { get; set; }
         public string Maps { get; set; }
+        public string Schemas { get; set; }
     }
 }

@@ -4,10 +4,15 @@
       "static": "..\\Static",
       "devStatic": "..\\DevStatic",
       "definitions": "Definitions",
-      "maps": "maps"
+      "schemas": "Schemas",
+      "maps": "Maps"
     },
-    "mapExtension": ".gmap",
-    "defaultMapName": "DefaultMap"
+    "files": {
+      "mapExtension": ".gmap",
+      "mapFile": "DefaultMap",
+      "definitionsSchemaSuffix": "Schema",
+      "biomesFile": "biomes"
+    }
   },
   "swaggerConfig": {
     "version": "v1",
