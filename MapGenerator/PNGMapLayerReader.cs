@@ -1,6 +1,6 @@
 ﻿using MapGenerator.Structures;
+using Shared;
 using Shared.Map;
-using Shared.Structures;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -11,19 +11,21 @@ namespace MapGenerator
     public class PNGMapLayerReader
     {
         private const string PNG_EXTENSION = ".png";
-        private readonly string _layerType;
+        private readonly DefinitionType _layerType;
+        private readonly string _layerSubType;
         private readonly string _path;
         private readonly Bitmap _bitmap;
-        private readonly TDefinition _definition;
+        private readonly TEnum _definition;
         private readonly Dictionary<TColor, string> _header;
 
-        public PNGMapLayerReader(string layerName, string directoryPath, TMapLayerHeader header, TDefinition definition)
+        public PNGMapLayerReader(string layerName, string directoryPath, TMapLayerHeader header, TEnum definition)
         {
             _path = Path.Combine(directoryPath, layerName + PNG_EXTENSION);
             _bitmap = new Bitmap(_path, true);
             _definition = definition;
             _header = header.Colors.ToDictionary(col => col.Color, col => col.Type);
             _layerType = header.Type;
+            _layerSubType = header.SubType;
         }
 
         public int GetHeight() => _bitmap.Height;
@@ -42,7 +44,7 @@ namespace MapGenerator
                     layerValues[index++] = TranslateColor(_bitmap.GetPixel(row, col));
                 }
             }
-            return new TMapLayer() { Type = _layerType, Values = layerValues };
+            return new TMapLayer() { Type = _layerType, SubType = _layerSubType, Values = layerValues };
         }
 
         private int TranslateColor(Color pixel)

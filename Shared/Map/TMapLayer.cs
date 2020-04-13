@@ -2,7 +2,8 @@
 {
     public struct TMapLayer
     {
-        public string Type { get; set; }
+        public DefinitionType Type { get; set; }
+        public string SubType { get; set; }
         public int[] Values { get; set; }
     }
 }

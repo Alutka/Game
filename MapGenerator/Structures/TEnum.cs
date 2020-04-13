@@ -1,22 +1,20 @@
 ﻿using System;
 
-namespace Shared.Structures
+namespace MapGenerator.Structures
 {
-    public class TDefinition
+    public class TEnum
     {
-        private readonly string _name;
         private readonly string[] _values;
 
-        public TDefinition(string name, string[] values)
+        public TEnum(string[] values)
         {
             _values = values;
-            _name = name;
         }
 
         public int GetKey(string value)
         {
             var result = Array.IndexOf(_values, value);
-            if (result < 0) throw new InvalidCastException($"{_name} {value} does not exist!");
+            if (result < 0) throw new InvalidCastException($"{value} does not exist!");
             return result;
         }
 
