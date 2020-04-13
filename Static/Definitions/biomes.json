@@ -1,0 +1,21 @@
+{
+    "type" : "Biome",
+    "items": [
+        {
+            "name": "mountains",
+            "canTravel": false
+        },
+        {
+            "name": "grassland",
+            "canTravel": true
+        },
+        {
+            "name": "forest",
+            "canTravel": true
+        },
+        {
+            "name": "desert",
+            "canTravel": true
+        }
+    ]
+}

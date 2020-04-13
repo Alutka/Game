@@ -1,0 +1,37 @@
+{   "type": "biome",
+    "colors":
+    [
+        {
+            "type": "mountains",
+            "color": {
+                "r": 195,
+                "g": 195,
+                "b": 195
+            }
+        },
+        {
+            "type": "forest",
+            "color": {
+                "r": 34,
+                "g": 177,
+                "b": 76
+            }
+        },
+        {
+            "type": "grassland",
+            "color": {
+                "r": 181,
+                "g": 230,
+                "b": 29
+            }
+        },
+        {
+            "type": "desert",
+            "color": {
+                "r": 255,
+                "g": 242,
+                "b": 0
+            }
+        }
+    ]
+}

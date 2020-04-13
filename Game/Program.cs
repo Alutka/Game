@@ -1,13 +1,21 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 
 namespace Game
 {
-    public class Program
+    public static class Program
     {
         public static void Main(string[] args)
         {
-            CreateWebHostBuilder(args).Build().Run();
+            IConfigurationRoot config = new ConfigurationBuilder()
+                .AddCommandLine(args)
+                .AddJsonFile("globalsettings.json", optional: false)
+                .Build();
+            CreateWebHostBuilder(args)
+                .UseConfiguration(config)
+                .Build()
+                .Run();
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
