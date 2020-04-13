@@ -6,6 +6,7 @@ body {
 }
 div {
   margin: 0;
+  font-size: 14px;
 }
 #main_container {
   width: 100%;
@@ -18,10 +19,12 @@ div {
   justify-content: flex-start;
   padding-left: 3px;
 }
-#header_details {
+#header_date {
   display: flex;
-  justify-content: end;
-  padding-right: 3px;
+  padding-left: 3px;
+}
+#header_weather {
+  display: flex;
   padding-left: 3px;
 }
 i {
@@ -32,6 +35,9 @@ i {
   display: flex;
   width: 100%;
   align-items: stretch;
+}
+#panel {
+  height: 100%;
 }
 #sidebar_wrapper {
   padding: 0;
@@ -91,7 +97,6 @@ ____________________________________
 .winter div {
   border: solid 1px blue;
   background-color: aqua;
-  font-size: 20px;
 }
 .winter .text-sidebar {
   color: blue;
