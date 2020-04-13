@@ -1,0 +1,59 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "oneOf": [
+        {
+            "$ref": "#/definitions/BiomeSchema"
+        }
+    ],
+    "definitions": {
+        "DefinitionType": {
+            "type":"string",
+            "enum": [
+                "Biome"
+            ]
+        },
+        "BiomeSchema": {
+            "type" : "object",
+            "additionalProperties": false,
+            "properties": {
+                "$schema": {
+					"title": "$schema"
+				},
+                "type": {
+                    "enum": [
+                        "Biome"
+                    ],
+                    "type": "string"
+                },
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Biome"
+                    },
+                    "minLength": 1
+                }
+            },
+            "required": [
+                "type",
+                "items"
+            ]
+        },
+        "Biome": {
+            "type" : "object",
+            "additionalProperties": false,
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "canTravel": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "name",
+                "canTravel"
+            ]
+        }
+    }
+}
