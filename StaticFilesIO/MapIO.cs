@@ -13,7 +13,7 @@ namespace StaticFilesIO
         public MapIO()
         {
             _mapDirectory = Path.Combine(ConfigurationInstance.Config.StoragePaths.Static, ConfigurationInstance.Config.StoragePaths.Maps);
-            _mapExtension = ConfigurationInstance.Config.MapExtension;
+            _mapExtension = ConfigurationInstance.Config.Files.MapExtension;
         }
 
         public void Export(TMap map)

@@ -21,8 +21,7 @@ namespace MapGenerator
 
         public PNGMapReader(string mapName)
         {
-            var definitionsReader = new DefinitionsReader();
-            _definitions = definitionsReader.Import();
+            _definitions = DefinitionsReader.Import();
             _mapName = mapName;
             _mapDirectory = Path.Combine(ConfigurationInstance.Config.StoragePaths.DevStatic, _mapName);
         }
