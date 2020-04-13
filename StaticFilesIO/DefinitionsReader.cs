@@ -12,7 +12,8 @@ namespace StaticFilesIO
         {
             return new TStaticDefinitions()
             {
-                Biomes = ReadDefinition<TDefinitionSet<TBiome>>(ConfigurationInstance.Config.Files.BiomesFile)
+                Biomes = ReadDefinition<TDefinitionSet<TBiome>>(ConfigurationInstance.Config.Files.BiomesFile),
+                Resources = ReadDefinition<TDefinitionSet<TResource>>(ConfigurationInstance.Config.Files.ResourcesFile)
             };
         }
 

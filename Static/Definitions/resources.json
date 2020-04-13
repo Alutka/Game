@@ -1,0 +1,12 @@
+{
+    "$schema": "../Schemas/resourcesSchema.json",
+    "type" : "Resource",
+    "items": [
+        {
+            "name": "magnetite",
+            "type": "metal",
+            "max": 1000,
+            "regenRate": 1
+        }
+    ]
+}

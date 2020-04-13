@@ -6,5 +6,6 @@
         public string MapFile { get; set; }
         public string DefinitionsSchemaSuffix { get; set; }
         public string BiomesFile { get; set; }
+        public string ResourcesFile { get; set; }
     }
 }

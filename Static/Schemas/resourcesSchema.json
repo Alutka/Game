@@ -1,0 +1,62 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$ref": "#/definitions/ResourceSchema",
+    "definitions": {
+        "DefinitionType": {
+            "type":"string",
+            "enum": [
+                "Biome"
+            ]
+        },
+        "ResourceSchema": {
+            "type" : "object",
+            "additionalProperties": false,
+            "properties": {
+                "$schema": {
+					"title": "$schema"
+				},
+                "type": {
+                    "enum": [
+                        "Resource"
+                    ],
+                    "type": "string"
+                },
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Resource"
+                    },
+                    "minLength": 1
+                }
+            },
+            "required": [
+                "type",
+                "items"
+            ]
+        },
+        "Resource": {
+            "type" : "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "regenRate": {
+                    "type": "number"
+                },
+                "max": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "name",
+                "type",
+                "regenRate",
+                "max"
+            ]
+        }
+    }
+}
