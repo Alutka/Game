@@ -8,8 +8,30 @@ div {
   margin: 0;
   font-size: 14px;
 }
+.navbar {
+  margin: 0;
+}
+.alert {
+  padding: 5px 25px 5px 5px;
+  display: flex;
+  justify-content: space-between;
+}
+.close {
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.show {
+  display: flex !important;
+}
+.notification_button_wrapper {
+  justify-content: flex-start;
+  align-items: flex-start;
+}
 #main_container {
   width: 100%;
+  padding-left: 18px;
+  padding-right: 18px;
+  min-width: 350px !important;
 }
 #header {
   width: 100%;
@@ -25,6 +47,8 @@ div {
 }
 #header_weather {
   display: flex;
+}
+#info {
   padding-left: 3px;
 }
 i {
@@ -48,11 +72,8 @@ i {
 #sidebar.active {
   margin-left: -250px;
 }
-#sidebar .sidebar-header {
-  padding: 20px;
-}
-#sidebar ul p {
-  padding: 10px;
+#sidebar {
+  padding: 5px;
 }
 #sidebar ul li a {
   padding: 10px;
@@ -73,16 +94,6 @@ ul ul a {
   font-size: 0.9em !important;
   padding-left: 30px !important;
 }
-ul.CTAs {
-  padding: 20px;
-}
-ul.CTAs a {
-  text-align: center;
-  font-size: 0.9em !important;
-  display: block;
-  border-radius: 5px;
-  margin-bottom: 5px;
-}
 /*
 ____________________________________
 
@@ -92,43 +103,38 @@ ____________________________________
 .winter html,
 .winter body {
   background-color: white;
-  border: solid 1px red;
 }
 .winter div {
-  border: solid 1px blue;
   background-color: aqua;
 }
+.winter .alert {
+  margin-bottom: 0;
+}
+.winter .navbar {
+  border: 1px solid aqua;
+  border-radius: 4px 4px 0 0;
+}
 .winter .text-sidebar {
-  color: blue;
+  color: darkblue;
 }
 .winter #sidebar {
-  background: blue;
+  background: aqua;
   color: black;
 }
-.winter #sidebar .sidebar-header {
-  background: blue;
-}
-.winter #sidebar ul.components {
-  border-bottom: 1px solid red;
-}
-.winter #sidebar ul p {
-  color: black;
+.winter #sidebar {
+  background: aqua;
 }
 .winter #sidebar ul li a:hover {
   color: blue;
-  background: aquamarine;
+  background: aqua;
 }
 .winter #sidebar ul li.active > a,
 .winter a[aria-expanded="true"] {
   color: black;
-  background: blue;
+  background: aqua;
 }
 .winter ul ul a {
-  background: blue;
-}
-.winter a.download {
-  background: black;
-  color: blue;
+  background: aqua;
 }
 .winter a.article,
 .winter a.article:hover {
@@ -152,14 +158,11 @@ ____________________________________
   background: blue;
   color: black;
 }
-.summer #sidebar .sidebar-header {
+.summer #sidebar {
   background: blue;
 }
 .summer #sidebar ul.components {
   border-bottom: 1px solid red;
-}
-.summer #sidebar ul p {
-  color: black;
 }
 .summer #sidebar ul li a:hover {
   color: blue;
@@ -172,10 +175,6 @@ ____________________________________
 }
 .summer ul ul a {
   background: blue;
-}
-.summer a.download {
-  background: black;
-  color: blue;
 }
 .summer a.article,
 .summer a.article:hover {
