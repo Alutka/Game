@@ -12,12 +12,12 @@ namespace StaticFilesIO
         {
             return new TStaticDefinitions()
             {
-                Biomes = ReadDefinition<TDefinitionSet<TBiome>>(ConfigurationInstance.Config.Files.BiomesFile),
-                Resources = ReadDefinition<TDefinitionSet<TResource>>(ConfigurationInstance.Config.Files.ResourcesFile)
+                Biomes = ReadDefinition<TBiome>(ConfigurationInstance.Config.Files.BiomesFile),
+                Sources = ReadDefinition<TSource>(ConfigurationInstance.Config.Files.SourcesFile)
             };
         }
 
-        private static T ReadDefinition<T>(string baseFileName) where T : AbstractDefinitionSet
+        private static TDefinitionSet<T> ReadDefinition<T>(string baseFileName) where T : AbstractDefinition
         {
             JSchema schema = ReadSchema(baseFileName);
             return ReadDefinitionBody<T>(baseFileName, schema);
@@ -31,7 +31,7 @@ namespace StaticFilesIO
             }
         }
 
-        private static T ReadDefinitionBody<T>(string baseFileName, JSchema schema) where T : AbstractDefinitionSet
+        private static TDefinitionSet<T> ReadDefinitionBody<T>(string baseFileName, JSchema schema) where T : AbstractDefinition
         {
             using (TextReader r = File.OpenText(Path.Combine(ConfigurationInstance.Config.StoragePaths.Static, ConfigurationInstance.Config.StoragePaths.Definitions, baseFileName + ".json")))
             {
@@ -40,7 +40,7 @@ namespace StaticFilesIO
                     Schema = schema
                 };
                 var serializer = new JsonSerializer();
-                return serializer.Deserialize<T>(jsonValidatingReader);
+                return serializer.Deserialize<TDefinitionSet<T>>(jsonValidatingReader);
             }
         }
     }

@@ -1,10 +1,13 @@
 {
     "$schema": "../Schemas/resourcesSchema.json",
-    "type" : "Resource",
     "items": [
         {
             "name": "magnetite",
-            "type": "metal",
+            "type": {
+                "name": "iron ore source",
+                "qualityFactor": 1,
+                "useRate": 1
+            },
             "max": 1000,
             "regenRate": 1
         }

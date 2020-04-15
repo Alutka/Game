@@ -1,0 +1,10 @@
+{
+    "definitions": {
+        "resourceType": {
+            "type":"string",
+            "enum": [
+                "iron ore source"
+            ]
+        }
+    }
+}

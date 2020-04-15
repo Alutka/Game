@@ -1,6 +1,6 @@
 ﻿namespace Shared.Definitions
 {
-    public class TResource : AbstractDefinition
+    public class TSource : AbstractDefinition
     {
         public string Type { get; set; }
         public int RegenRate { get; set; }

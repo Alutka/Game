@@ -12,6 +12,7 @@
       "mapFile": "DefaultMap",
       "definitionsSchemaSuffix": "Schema",
       "biomesFile": "biomes",
+      "sourcesFile": "sources",
       "resourcesFile": "resources"
     }
   },

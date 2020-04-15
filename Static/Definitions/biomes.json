@@ -1,6 +1,5 @@
 {
     "$schema": "../Schemas/biomesSchema.json",
-    "type" : "Biome",
     "items": [
         {
             "name": "mountains",

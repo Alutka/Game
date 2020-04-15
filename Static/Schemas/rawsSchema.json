@@ -1,14 +1,14 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
-    "$ref": "#/definitions/ReourceSchema",
+    "$ref": "#/definitions/ResourceSchema",
     "definitions": {
-        "reourceType": {
+        "ResourceType": {
             "type":"string",
             "enum": [
-                "iron ore source"
+                "Fuel"
             ]
         },
-        "reourceSchema": {
+        "ResourceSchema": {
             "type" : "object",
             "additionalProperties": false,
             "properties": {
@@ -18,7 +18,7 @@
                 "items": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/reource"
+                        "$ref": "#/definitions/Resource"
                     },
                     "minLength": 1
                 }
@@ -27,8 +27,8 @@
                 "items"
             ]
         },
-        "Reource": {
-            "type" : "object",
+        "Resource": {
+            "type": "object",
             "additionalProperties": false,
             "properties": {
                 "type": {
@@ -38,19 +38,11 @@
                     "type": "string"
                 },
                 "regenRate": {
-                    "type": "number",
-                    "minimum": 0
+                    "type": "number"
                 },
                 "max": {
-                    "type": "number",
-                    "minimum": 0
-                },
-                "quality": {
-                    "type": "number",
-                    "minimum": 1,
-                    "maximum": 5
+                    "type": "number"
                 }
-
             },
             "required": [
                 "name",
@@ -64,11 +56,16 @@
             "additionalProperties": false,
             "properties": {
                 "name": {
-                    "$ref": "#/definitions/ReourceType"
+                    "$ref": "#/definitions/ResourceType"
                 },
                 "useRate": {
                     "type": "number",
                     "minimum": 1
+                },
+                "qualityFactor": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
                 }
             },
             "required": [
