@@ -1,14 +1,8 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
-    "$ref": "#/definitions/ReourceSchema",
+    "$ref": "#/definitions/resourceSchema",
     "definitions": {
-        "reourceType": {
-            "type":"string",
-            "enum": [
-                "iron ore source"
-            ]
-        },
-        "reourceSchema": {
+        "resourceSchema": {
             "type" : "object",
             "additionalProperties": false,
             "properties": {
@@ -18,7 +12,7 @@
                 "items": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/reource"
+                        "$ref": "#/definitions/resource"
                     },
                     "minLength": 1
                 }
@@ -27,15 +21,15 @@
                 "items"
             ]
         },
-        "Reource": {
+        "resource": {
             "type" : "object",
             "additionalProperties": false,
             "properties": {
                 "type": {
-                    "$ref": "#/definitions/Type"
+                    "$ref": "#/definitions/type"
                 },
                 "name": {
-                    "type": "string"
+                    "$ref": "enums.json#/definitions/resourceName"
                 },
                 "regenRate": {
                     "type": "number",
@@ -44,11 +38,6 @@
                 "max": {
                     "type": "number",
                     "minimum": 0
-                },
-                "quality": {
-                    "type": "number",
-                    "minimum": 1,
-                    "maximum": 5
                 }
 
             },
@@ -59,12 +48,12 @@
                 "max"
             ]
         },
-        "Type": {
+        "type": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
                 "name": {
-                    "$ref": "#/definitions/ReourceType"
+                    "$ref": "enums.json#/definitions/resourceType"
                 },
                 "useRate": {
                     "type": "number",

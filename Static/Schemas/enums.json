@@ -1,0 +1,39 @@
+{
+    "definitions": {
+        "biomeName": {
+            "type":"string",
+            "enum": [
+                "mountains",
+                "grassland",
+                "forest",
+                "desert"
+            ]
+        },
+        "resourceType": {
+            "type":"string",
+            "enum": [
+                "iron ore source"
+            ]
+        },
+        "resourceName": {
+            "type":"string",
+            "enum": [
+                "magnetite"
+            ]
+        },
+        "rawName": {
+            "type":"string",
+            "enum": [
+                "iron",
+                "wood"
+            ]
+        },
+        "rawType":{
+            "type":"string",
+            "enum": [
+                "fuel",
+                "metal ore"
+            ]
+        }
+    }
+}
