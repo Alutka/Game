@@ -13,7 +13,7 @@ namespace StaticFilesIO
             return new TStaticDefinitions()
             {
                 Biomes = ReadDefinition<TBiome>(ConfigurationInstance.Config.Files.BiomesFile),
-                Sources = ReadDefinition<TSource>(ConfigurationInstance.Config.Files.SourcesFile)
+                Sources = ReadDefinition<TResource>(ConfigurationInstance.Config.Files.SourcesFile)
             };
         }
 
