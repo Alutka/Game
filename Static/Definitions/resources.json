@@ -3,10 +3,6 @@
     "items": [
         {
             "name": "magnetite",
-            "type": {
-                "name": "iron ore source",
-                "useRate": 1
-            },
             "max": 1000,
             "regenRate": 1
         }

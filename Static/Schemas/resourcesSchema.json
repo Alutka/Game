@@ -25,9 +25,6 @@
             "type" : "object",
             "additionalProperties": false,
             "properties": {
-                "type": {
-                    "$ref": "#/definitions/type"
-                },
                 "name": {
                     "$ref": "enums.json#/definitions/resourceName"
                 },
@@ -46,22 +43,6 @@
                 "type",
                 "regenRate",
                 "max"
-            ]
-        },
-        "type": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "name": {
-                    "$ref": "enums.json#/definitions/resourceType"
-                },
-                "useRate": {
-                    "type": "number",
-                    "minimum": 1
-                }
-            },
-            "required": [
-                "name"
             ]
         }
     }

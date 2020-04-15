@@ -9,12 +9,6 @@
                 "desert"
             ]
         },
-        "resourceType": {
-            "type":"string",
-            "enum": [
-                "iron ore source"
-            ]
-        },
         "resourceName": {
             "type":"string",
             "enum": [
@@ -26,13 +20,6 @@
             "enum": [
                 "iron",
                 "wood"
-            ]
-        },
-        "rawType":{
-            "type":"string",
-            "enum": [
-                "fuel",
-                "metal ore"
             ]
         }
     }
