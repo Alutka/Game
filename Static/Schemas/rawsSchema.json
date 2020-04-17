@@ -26,11 +26,119 @@
             "additionalProperties": false,
             "properties": {
                 "name": {
-                    "$ref": "enums.json#/definitions/rawName"
+                    "$ref": "enums.json#/definitions/raw"
+                },
+                "recipes": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/recipe"
+                    },
+                    "minItems": 1
                 }
             },
             "required": [
-                "name"
+                "name",
+                "recipes"
+            ]
+        },
+        "recipe": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "skill": {
+                    "$ref": "enums.json#/definitions/skill"
+                },
+                "difficulty": {
+                    "type": "number",
+                    "maximum": 20,
+                    "minimum": 1
+                },
+                "resource": {
+                    "$ref": "enums.json#/definitions/resource"
+                },
+                "yields": {
+                    "type": "number",
+                    "minimum": 1
+                },
+                "tools": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/tool"
+                    }
+                },
+                "machines": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/machine"
+                    }
+                },
+                "buildings": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/building"
+                    }
+                }
+            },
+            "required": [
+                "name",
+                "skill",
+                "difficulty",
+                "resource",
+                "yields"
+            ]
+        },
+        "tool": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "name": {
+                    "$ref": "enums.json#/definitions/tool"
+                },
+                "speedBoost": {
+                    "type": "number",
+                    "minimum": 1
+                }
+            },
+            "required": [
+                "name",
+                "speedBoost"
+            ]
+        },
+        "machine": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "name": {
+                    "$ref": "enums.json#/definitions/machine"
+                },
+                "speedBoost": {
+                    "type": "number",
+                    "minimum": 1
+                }
+            },
+            "required": [
+                "name",
+                "speedBoost"
+            ]
+        },
+        "building": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "name": {
+                    "$ref": "enums.json#/definitions/building"
+                },
+                "speedBoost": {
+                    "type": "number",
+                    "minimum": 1
+                }
+            },
+            "required": [
+                "name",
+                "speedBoost"
             ]
         }
     }

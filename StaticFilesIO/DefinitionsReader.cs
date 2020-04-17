@@ -2,6 +2,7 @@
 using Newtonsoft.Json.Schema;
 using Shared.Configuration;
 using Shared.Definitions;
+using System;
 using System.IO;
 
 namespace StaticFilesIO
@@ -13,7 +14,8 @@ namespace StaticFilesIO
             return new TStaticDefinitions()
             {
                 Biomes = ReadDefinition<TBiome>(ConfigurationInstance.Config.Files.BiomesFile),
-                Sources = ReadDefinition<TResource>(ConfigurationInstance.Config.Files.SourcesFile)
+                Resources = ReadDefinition<TResource>(ConfigurationInstance.Config.Files.ResourcesFile),
+                Raws = ReadDefinition<TRaw>(ConfigurationInstance.Config.Files.RawsFile)
             };
         }
 
@@ -25,9 +27,15 @@ namespace StaticFilesIO
 
         private static JSchema ReadSchema(string baseFileName)
         {
-            using (TextReader reader = File.OpenText(Path.Combine(ConfigurationInstance.Config.StoragePaths.Static, ConfigurationInstance.Config.StoragePaths.Schemas, baseFileName + ConfigurationInstance.Config.Files.DefinitionsSchemaSuffix + ".json")))
+            string filePath = Path.Combine(ConfigurationInstance.Config.StoragePaths.Static, ConfigurationInstance.Config.StoragePaths.Schemas, baseFileName + ConfigurationInstance.Config.Files.DefinitionsSchemaSuffix + ".json");
+            using (TextReader reader = File.OpenText(filePath))
             {
-                return JSchema.Load(new JsonTextReader(reader));
+                return JSchema.Load(new JsonTextReader(reader), new JSchemaReaderSettings()
+                {
+                    Resolver = new JSchemaUrlResolver(),
+                    ResolveSchemaReferences = true,
+                    BaseUri = new Uri(Path.GetFullPath(filePath))
+                });
             }
         }
 

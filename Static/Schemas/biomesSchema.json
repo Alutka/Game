@@ -26,10 +26,16 @@
             "additionalProperties": false,
             "properties": {
                 "name": {
-                    "$ref": "enums.json#/definitions/biomeName"
+                    "$ref": "enums.json#/definitions/biome"
                 },
                 "canTravel": {
                     "type": "boolean"
+                },
+                "resources": {
+                    "type" : "array",
+                    "items": {
+                        "$ref": "enums.json#/definitions/resource"
+                    }
                 }
             },
             "required": [

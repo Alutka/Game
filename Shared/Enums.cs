@@ -3,6 +3,7 @@
     public enum DefinitionType
     {
         Biome,
-        Resource
+        Resource,
+        Raw
     }
 }

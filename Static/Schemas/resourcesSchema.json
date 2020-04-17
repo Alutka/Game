@@ -26,7 +26,7 @@
             "additionalProperties": false,
             "properties": {
                 "name": {
-                    "$ref": "enums.json#/definitions/resourceName"
+                    "$ref": "enums.json#/definitions/resource"
                 },
                 "regenRate": {
                     "type": "number",
@@ -40,7 +40,6 @@
             },
             "required": [
                 "name",
-                "type",
                 "regenRate",
                 "max"
             ]

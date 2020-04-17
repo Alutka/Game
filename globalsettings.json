@@ -13,7 +13,8 @@
       "definitionsSchemaSuffix": "Schema",
       "biomesFile": "biomes",
       "sourcesFile": "sources",
-      "resourcesFile": "resources"
+      "resourcesFile": "resources",
+      "rawsFile": "raws"
     }
   },
   "swaggerConfig": {
