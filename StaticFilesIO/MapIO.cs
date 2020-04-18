@@ -27,8 +27,6 @@ namespace StaticFilesIO
             using (BinaryWriter writer = new BinaryWriter(File.Create(mapPath)))
             {
                 writer.Write(map.Name);
-                writer.Write(map.Height);
-                writer.Write(map.Width);
                 writer.Write(map.Layers.Length);
                 for (int i = 0; i < map.Layers.Length; i++)
                 {
@@ -43,15 +41,13 @@ namespace StaticFilesIO
             using (BinaryReader reader = new BinaryReader(File.OpenRead(mapPath)))
             {
                 string name = reader.ReadString();
-                int height = reader.ReadInt32();
-                int width = reader.ReadInt32();
                 int layersCount = reader.ReadInt32();
                 var layers = new TMapLayer[layersCount];
                 for (int i = 0; i < layersCount; i++)
                 {
                     layers[i] = ReadLayer(reader);
                 }
-                return new TMap() { Name = name, Height = height, Width = width, Layers = layers };
+                return new TMap() { Name = name, Layers = layers };
             }
         }
 

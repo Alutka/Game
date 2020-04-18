@@ -4,6 +4,7 @@ using Shared.Configuration;
 using Shared.Definitions;
 using Shared.Map;
 using StaticFilesIO;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -27,27 +28,28 @@ namespace MapGenerator
 
         public TMap ReadMap()
         {
-            int height = -1;
-            int width = -1;
             List<TMapLayer> mapLayers = new List<TMapLayer>();
             IEnumerable<string> layerNames = Directory.GetFiles(_mapDirectory).Select(name => Path.GetFileNameWithoutExtension(name)).Distinct();
-            foreach (var layer in layerNames)
+            foreach (var layerName in layerNames)
             {
-                TMapLayerHeader header = ReadLayerHeader(layer);
-                var bitmap = new Bitmap(Path.Combine(_mapDirectory, layer + ".png"), true);
+                TMapLayerHeader header = ReadLayerHeader(layerName);
+                var bitmap = new Bitmap(Path.Combine(_mapDirectory, layerName + ".png"), true);
                 var layerReader = new PNGMapLayerReader(bitmap, header);
-                if (height == -1)
-                {
-                    height = layerReader.GetHeight();
-                    width = layerReader.GetWidth();
-                }
-                if (height != layerReader.GetHeight() || width != layerReader.GetWidth())
-                {
-                    throw new InvalidDataException($"Map {_mapName} contains layers of different sizes!");
-                }
-                mapLayers.Add(layerReader.ReadLayer());
+                TMapLayer layer = layerReader.ReadLayer();
+                mapLayers.Add(layer);
             }
-            return new TMap() { Name = _mapName, Width = width, Height = height, Layers = mapLayers.ToArray() };
+            ValidateLayers(mapLayers);
+            return new TMap() { Name = _mapName, Layers = mapLayers.ToArray() };
+        }
+
+        private void ValidateLayers(List<TMapLayer> mapLayers)
+        {
+            var layersHeights = mapLayers.Select(m => m.Height);
+            var layersWidths = mapLayers.Select(m => m.Width);
+            if (layersHeights.Distinct().Count() != 1 || layersWidths.Distinct().Count() != 1)
+            {
+                throw new Exception("Layers have different sizes!");
+            }
         }
 
         private TMapLayerHeader ReadLayerHeader(string layerName)
