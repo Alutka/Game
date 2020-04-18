@@ -1,0 +1,52 @@
+{
+    "definitions": {
+        "skill": {
+            "type":"string",
+            "enum": [
+                "cooking",
+                "mining"
+            ]
+        },
+        "biome": {
+            "type":"string",
+            "enum": [
+                "mountains",
+                "grassland",
+                "forest",
+                "desert"
+            ]
+        },
+        "resource": {
+            "type":"string",
+            "enum": [
+                "magnetite",
+                "pine forest"
+            ]
+        },
+        "raw": {
+            "type":"string",
+            "enum": [
+                "iron",
+                "wood"
+            ]
+        },
+        "tool": {
+            "type":"string",
+            "enum": [
+                "hammer"
+            ]
+        },
+        "machine": {
+            "type":"string",
+            "enum": [
+                "harvester"
+            ]
+        },
+        "building": {
+            "type":"string",
+            "enum": [
+                "iron mine"
+            ]
+        }
+    }
+}

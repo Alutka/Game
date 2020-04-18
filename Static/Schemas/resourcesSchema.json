@@ -1,8 +1,8 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
-    "$ref": "#/definitions/biomeSchema",
+    "$ref": "#/definitions/resourceSchema",
     "definitions": {
-        "biomeSchema": {
+        "resourceSchema": {
             "type" : "object",
             "additionalProperties": false,
             "properties": {
@@ -12,7 +12,7 @@
                 "items": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/biome"
+                        "$ref": "#/definitions/resource"
                     },
                     "minLength": 1
                 }
@@ -21,26 +21,27 @@
                 "items"
             ]
         },
-        "biome": {
+        "resource": {
             "type" : "object",
             "additionalProperties": false,
             "properties": {
                 "name": {
-                    "$ref": "enums.json#/definitions/biome"
+                    "$ref": "enums.json#/definitions/resource"
                 },
-                "canTravel": {
-                    "type": "boolean"
+                "regenRate": {
+                    "type": "number",
+                    "minimum": 0
                 },
-                "resources": {
-                    "type" : "array",
-                    "items": {
-                        "$ref": "enums.json#/definitions/resource"
-                    }
+                "max": {
+                    "type": "number",
+                    "minimum": 0
                 }
+
             },
             "required": [
                 "name",
-                "canTravel"
+                "regenRate",
+                "max"
             ]
         }
     }

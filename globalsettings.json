@@ -11,7 +11,10 @@
       "mapExtension": ".gmap",
       "mapFile": "DefaultMap",
       "definitionsSchemaSuffix": "Schema",
-      "biomesFile": "biomes"
+      "biomesFile": "biomes",
+      "sourcesFile": "sources",
+      "resourcesFile": "resources",
+      "rawsFile": "raws"
     }
   },
   "swaggerConfig": {

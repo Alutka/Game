@@ -1,0 +1,15 @@
+{
+    "$schema": "../Schemas/resourcesSchema.json",
+    "items": [
+        {
+            "name": "magnetite",
+            "max": 1000,
+            "regenRate": 1
+        },
+        {
+            "name": "pine forest",
+            "max": 1100,
+            "regenRate": 2
+        }
+    ]
+}

@@ -1,0 +1,22 @@
+{
+    "$schema": "../Schemas/rawsSchema.json",
+    "items": [
+        {
+            "name": "iron",
+            "recipes": [
+                {
+                    "name": "mining iron from magnetite",
+                    "resource": "magnetite",
+                    "skill": "mining",
+                    "difficulty": 1,
+                    "yields": 500,
+                    "tools": [ {
+                        "name": "hammer",
+                        "speedBoost": 1
+                    }
+                    ]
+                }
+            ]
+        }
+    ]
+}

@@ -2,6 +2,7 @@
 using Newtonsoft.Json.Schema;
 using Shared.Configuration;
 using Shared.Definitions;
+using System;
 using System.IO;
 
 namespace StaticFilesIO
@@ -12,11 +13,13 @@ namespace StaticFilesIO
         {
             return new TStaticDefinitions()
             {
-                Biomes = ReadDefinition<TDefinitionSet<TBiome>>(ConfigurationInstance.Config.Files.BiomesFile)
+                Biomes = ReadDefinition<TBiome>(ConfigurationInstance.Config.Files.BiomesFile),
+                Resources = ReadDefinition<TResource>(ConfigurationInstance.Config.Files.ResourcesFile),
+                Raws = ReadDefinition<TRaw>(ConfigurationInstance.Config.Files.RawsFile)
             };
         }
 
-        private static T ReadDefinition<T>(string baseFileName) where T : AbstractDefinitionSet
+        private static TDefinitionSet<T> ReadDefinition<T>(string baseFileName) where T : AbstractDefinition
         {
             JSchema schema = ReadSchema(baseFileName);
             return ReadDefinitionBody<T>(baseFileName, schema);
@@ -24,13 +27,19 @@ namespace StaticFilesIO
 
         private static JSchema ReadSchema(string baseFileName)
         {
-            using (TextReader reader = File.OpenText(Path.Combine(ConfigurationInstance.Config.StoragePaths.Static, ConfigurationInstance.Config.StoragePaths.Schemas, baseFileName + ConfigurationInstance.Config.Files.DefinitionsSchemaSuffix + ".json")))
+            string filePath = Path.Combine(ConfigurationInstance.Config.StoragePaths.Static, ConfigurationInstance.Config.StoragePaths.Schemas, baseFileName + ConfigurationInstance.Config.Files.DefinitionsSchemaSuffix + ".json");
+            using (TextReader reader = File.OpenText(filePath))
             {
-                return JSchema.Load(new JsonTextReader(reader));
+                return JSchema.Load(new JsonTextReader(reader), new JSchemaReaderSettings()
+                {
+                    Resolver = new JSchemaUrlResolver(),
+                    ResolveSchemaReferences = true,
+                    BaseUri = new Uri(Path.GetFullPath(filePath))
+                });
             }
         }
 
-        private static T ReadDefinitionBody<T>(string baseFileName, JSchema schema) where T : AbstractDefinitionSet
+        private static TDefinitionSet<T> ReadDefinitionBody<T>(string baseFileName, JSchema schema) where T : AbstractDefinition
         {
             using (TextReader r = File.OpenText(Path.Combine(ConfigurationInstance.Config.StoragePaths.Static, ConfigurationInstance.Config.StoragePaths.Definitions, baseFileName + ".json")))
             {
@@ -39,7 +48,7 @@ namespace StaticFilesIO
                     Schema = schema
                 };
                 var serializer = new JsonSerializer();
-                return serializer.Deserialize<T>(jsonValidatingReader);
+                return serializer.Deserialize<TDefinitionSet<T>>(jsonValidatingReader);
             }
         }
     }
