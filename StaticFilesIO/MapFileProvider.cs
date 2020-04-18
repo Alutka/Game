@@ -3,7 +3,7 @@ using System.IO;
 
 namespace StaticFilesIO
 {
-    public static class FileProvider
+    public static class MapFileProvider
     {
         public static Stream GetMapExportStream()
         {

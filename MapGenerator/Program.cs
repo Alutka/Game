@@ -11,7 +11,7 @@ namespace MapGenerator
             Startup.LoadConfiguration();
             var reader = new PNGMapReader("DefaultMap");
             TMap map = reader.ReadMap();
-            MapIO.Export(map, FileProvider.GetMapExportStream());
+            MapIO.Export(map, MapFileProvider.GetMapExportStream());
             Console.WriteLine("Map generated!");
         }
     }

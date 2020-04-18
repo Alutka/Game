@@ -14,7 +14,10 @@ namespace Game.Map
 
         public void Import()
         {
-            _map = MapIO.Import(FileProvider.GetMapImportStream());
+            using (System.IO.Stream stream = MapFileProvider.GetMapImportStream())
+            {
+                _map = MapIO.Import(stream);
+            }
         }
     }
 }
