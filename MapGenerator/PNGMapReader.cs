@@ -12,7 +12,6 @@ namespace MapGenerator
 {
     public class PNGMapReader
     {
-        private const string HEADER_EXTENSION = ".json";
         private readonly string _mapName;
         private readonly string _mapDirectory;
 
@@ -50,7 +49,7 @@ namespace MapGenerator
 
         private TMapLayerHeader ReadLayerHeader(string layerName)
         {
-            using (StreamReader r = new StreamReader(Path.Combine(_mapDirectory, layerName + HEADER_EXTENSION)))
+            using (StreamReader r = new StreamReader(Path.Combine(_mapDirectory, layerName + ".json")))
             {
                 string json = r.ReadToEnd();
                 return JsonConvert.DeserializeObject<TMapLayerHeader>(json);
