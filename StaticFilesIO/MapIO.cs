@@ -62,22 +62,42 @@ namespace StaticFilesIO
         private TMapLayer ReadLayer(BinaryReader reader, int length)
         {
             DefinitionType type = (DefinitionType)reader.ReadInt32();
-            string subType = reader.ReadString();
             int[] values = new int[length];
             for (int i = 0; i < length; i++)
             {
                 values[i] = reader.ReadInt32();
             }
-            return new TMapLayer() { Type = type, SubType = subType, Values = values };
+            TLayerEnum layerEnum = ReadLayerEnum(reader);
+            return new TMapLayer() { Type = type, Values = values, LayerEnum = layerEnum };
+        }
+
+        private TLayerEnum ReadLayerEnum(BinaryReader reader)
+        {
+            int length = reader.ReadInt32();
+            string[] names = new string[length];
+            for (int i = 0; i < length; i++)
+            {
+                names[i] = reader.ReadString();
+            }
+            return new TLayerEnum(names);
         }
 
         private void WriteLayer(BinaryWriter writer, TMapLayer layer, int length)
         {
             writer.Write((int)layer.Type);
-            writer.Write(layer.SubType ?? string.Empty);
             for (int i = 0; i < length; i++)
             {
                 writer.Write(layer.Values[i]);
+            }
+            WriteLayerEnum(writer, layer.LayerEnum);
+        }
+
+        private void WriteLayerEnum(BinaryWriter writer, TLayerEnum layerEnum)
+        {
+            writer.Write(layerEnum.Length);
+            for (int i = 0; i < layerEnum.Length; i++)
+            {
+                writer.Write(layerEnum.GetName(i));
             }
         }
     }

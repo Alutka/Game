@@ -12,20 +12,20 @@ namespace MapGenerator
     {
         private const string PNG_EXTENSION = ".png";
         private readonly DefinitionType _layerType;
-        private readonly string _layerSubType;
         private readonly string _path;
         private readonly Bitmap _bitmap;
         private readonly TEnum _definition;
-        private readonly Dictionary<TColor, string> _header;
+        private readonly Dictionary<TColor, string> _colorDictionary;
+        private readonly TMapLayerHeader _header;
 
         public PNGMapLayerReader(string layerName, string directoryPath, TMapLayerHeader header, TEnum definition)
         {
             _path = Path.Combine(directoryPath, layerName + PNG_EXTENSION);
             _bitmap = new Bitmap(_path, true);
             _definition = definition;
-            _header = header.Colors.ToDictionary(col => col.Color, col => col.Type);
+            _colorDictionary = header.Colors.ToDictionary(col => col.Color, col => col.Type);
             _layerType = header.Type;
-            _layerSubType = header.SubType;
+            _header = header;
         }
 
         public int GetHeight() => _bitmap.Height;
@@ -44,12 +44,17 @@ namespace MapGenerator
                     layerValues[index++] = TranslateColor(_bitmap.GetPixel(row, col));
                 }
             }
-            return new TMapLayer() { Type = _layerType, SubType = _layerSubType, Values = layerValues };
+            return new TMapLayer()
+            {
+                Type = _layerType,
+                Values = layerValues,
+                LayerEnum = new TLayerEnum(_header.Colors.Select(col => col.Type).ToArray())
+            };
         }
 
         private int TranslateColor(Color pixel)
         {
-            return _definition.GetKey(_header[new TColor() { R = pixel.R, B = pixel.B, G = pixel.G }]);
+            return _definition.GetKey(_colorDictionary[new TColor() { R = pixel.R, B = pixel.B, G = pixel.G }]);
         }
     }
 }
