@@ -32,11 +32,13 @@ namespace Tests.StaticIO
                     new TMapLayer(width, height, values2, lenum2, DefinitionType.Resource)
                 }
             };
-            var stream = new MemoryStream();
-            MapIO.Export(map, stream, true);
-            stream.Seek(0, SeekOrigin.Begin);
-            TMap result = MapIO.Import(stream);
-            Assert.Equal(map.Name, result.Name);
+            using (var stream = new MemoryStream())
+            {
+                MapIO.Export(map, stream, true);
+                stream.Seek(0, SeekOrigin.Begin);
+                TMap result = MapIO.Import(stream);
+                Assert.Equal(map.Name, result.Name);
+            }
         }
     }
 }
