@@ -11,7 +11,10 @@
         },
         {
             "name": "forest",
-            "canTravel": true
+            "canTravel": true,
+            "resources": [
+                "pine forest"
+            ]
         },
         {
             "name": "desert",

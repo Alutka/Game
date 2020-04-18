@@ -1,8 +1,11 @@
-﻿namespace Shared.Map
+﻿using Shared.Interfaces;
+
+namespace Shared.Map
 {
     public class TMap
     {
         public string Name { get; set; }
-        public TMapLayer[] Layers { get; set; }
+        public IMapLayer[] ResourceLayers { get; set; }
+        public IMapLayer BiomeLayer { get; set; }
     }
 }

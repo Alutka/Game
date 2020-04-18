@@ -26,9 +26,9 @@ namespace Tests.StaticIO
             var map = new TMap()
             {
                 Name = "test",
-                Layers = new TMapLayer[]
+                BiomeLayer = new TMapLayer(width, height, values, lenum1, DefinitionType.Biome),
+                ResourceLayers = new TMapLayer[]
                 {
-                    new TMapLayer(width, height, values, lenum1, DefinitionType.Biome),
                     new TMapLayer(width, height, values2, lenum2, DefinitionType.Resource)
                 }
             };
