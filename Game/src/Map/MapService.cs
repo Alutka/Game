@@ -1,5 +1,4 @@
 ﻿using Game.Interfaces;
-using Shared.Configuration;
 using Shared.Map;
 using StaticFilesIO;
 
@@ -15,8 +14,7 @@ namespace Game.Map
 
         public void Import()
         {
-            var mapIO = new MapIO();
-            _map = mapIO.Import(ConfigurationInstance.Config.Files.MapFile);
+            _map = MapIO.Import(FileProvider.GetMapImportStream());
         }
     }
 }

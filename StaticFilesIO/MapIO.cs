@@ -1,30 +1,15 @@
 ﻿using Shared;
-using Shared.Configuration;
 using Shared.Map;
 using Shared.Structures;
 using System.IO;
 
 namespace StaticFilesIO
 {
-    public class MapIO
+    public static class MapIO
     {
-        private readonly string _mapDirectory;
-        private readonly string _mapExtension;
-
-        public MapIO()
+        public static void Export(TMap map, Stream stream)
         {
-            _mapDirectory = Path.Combine(ConfigurationInstance.Config.StoragePaths.Static, ConfigurationInstance.Config.StoragePaths.Maps);
-            _mapExtension = ConfigurationInstance.Config.Files.MapExtension;
-        }
-
-        public void Export(TMap map)
-        {
-            var mapPath = GetMapPath(map.Name);
-            if (File.Exists(mapPath))
-            {
-                File.Delete(mapPath);
-            }
-            using (BinaryWriter writer = new BinaryWriter(File.Create(mapPath)))
+            using (BinaryWriter writer = new BinaryWriter(stream))
             {
                 writer.Write(map.Name);
                 writer.Write(map.Layers.Length);
@@ -35,10 +20,9 @@ namespace StaticFilesIO
             }
         }
 
-        public TMap Import(string mapName)
+        public static TMap Import(Stream stream)
         {
-            string mapPath = GetMapPath(mapName);
-            using (BinaryReader reader = new BinaryReader(File.OpenRead(mapPath)))
+            using (BinaryReader reader = new BinaryReader(stream))
             {
                 string name = reader.ReadString();
                 int layersCount = reader.ReadInt32();
@@ -51,12 +35,7 @@ namespace StaticFilesIO
             }
         }
 
-        private string GetMapPath(string mapName)
-        {
-            return Path.Combine(_mapDirectory, mapName + _mapExtension);
-        }
-
-        private TMapLayer ReadLayer(BinaryReader reader)
+        private static TMapLayer ReadLayer(BinaryReader reader)
         {
             DefinitionType type = (DefinitionType)reader.ReadInt32();
             int width = reader.ReadInt32();
@@ -71,7 +50,7 @@ namespace StaticFilesIO
             return new TMapLayer(width, height, values, layerEnum, type);
         }
 
-        private TEnum ReadLayerEnum(BinaryReader reader)
+        private static TEnum ReadLayerEnum(BinaryReader reader)
         {
             int length = reader.ReadInt32();
             string[] names = new string[length];
@@ -82,7 +61,7 @@ namespace StaticFilesIO
             return new TEnum(names);
         }
 
-        private void WriteLayer(BinaryWriter writer, TMapLayer layer)
+        private static void WriteLayer(BinaryWriter writer, TMapLayer layer)
         {
             writer.Write((int)layer.Type);
             writer.Write(layer.Width);
@@ -94,7 +73,7 @@ namespace StaticFilesIO
             WriteLayerEnum(writer, layer.LayerEnum);
         }
 
-        private void WriteLayerEnum(BinaryWriter writer, TEnum layerEnum)
+        private static void WriteLayerEnum(BinaryWriter writer, TEnum layerEnum)
         {
             writer.Write(layerEnum.Length);
             for (int i = 0; i < layerEnum.Length; i++)
