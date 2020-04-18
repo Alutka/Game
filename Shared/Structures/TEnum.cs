@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MapGenerator.Structures
+namespace Shared.Structures
 {
     public class TEnum
     {

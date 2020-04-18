@@ -1,12 +1,11 @@
 ﻿using MapGenerator.Structures;
 using Newtonsoft.Json;
-using Shared;
 using Shared.Configuration;
 using Shared.Definitions;
 using Shared.Map;
 using StaticFilesIO;
-using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 
@@ -35,7 +34,8 @@ namespace MapGenerator
             foreach (var layer in layerNames)
             {
                 TMapLayerHeader header = ReadLayerHeader(layer);
-                var layerReader = new PNGMapLayerReader(layer, _mapDirectory, header, TranslateToEnum(header));
+                var bitmap = new Bitmap(Path.Combine(_mapDirectory, layer + ".png"), true);
+                var layerReader = new PNGMapLayerReader(bitmap, header);
                 if (height == -1)
                 {
                     height = layerReader.GetHeight();
@@ -57,15 +57,6 @@ namespace MapGenerator
                 string json = r.ReadToEnd();
                 return JsonConvert.DeserializeObject<TMapLayerHeader>(json);
             }
-        }
-
-        private TEnum TranslateToEnum(TMapLayerHeader header)
-        {
-            if (header.Type == DefinitionType.Biome)
-            {
-                return new TEnum(_definitions.Biomes.Items.Select(i => i.Name).ToArray());
-            }
-            throw new NotImplementedException();
         }
     }
 }
