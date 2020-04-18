@@ -1,10 +1,12 @@
 ﻿using System;
 
-namespace MapGenerator.Structures
+namespace Shared.Structures
 {
     public class TEnum
     {
         private readonly string[] _values;
+
+        public int Length => _values.Length;
 
         public TEnum(string[] values)
         {

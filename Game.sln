@@ -5,16 +5,18 @@ VisualStudioVersion = 16.0.29519.87
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Game", "Game\Game.csproj", "{BD8F29BD-F365-425C-A8AF-6E359CBEE457}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapGenerator", "MapGenerator\MapGenerator.csproj", "{FB0061A5-6542-42AD-B6D7-02D8FDAAD4B1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MapGenerator", "MapGenerator\MapGenerator.csproj", "{FB0061A5-6542-42AD-B6D7-02D8FDAAD4B1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StaticFilesIO", "StaticFilesIO\StaticFilesIO.csproj", "{84B37CFB-25C5-4499-885A-D9F2FE2F9484}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StaticFilesIO", "StaticFilesIO\StaticFilesIO.csproj", "{84B37CFB-25C5-4499-885A-D9F2FE2F9484}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{EF7EA73F-8C1C-45F8-A7B3-A1C51F7B3DF8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared", "Shared\Shared.csproj", "{EF7EA73F-8C1C-45F8-A7B3-A1C51F7B3DF8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5424D581-E35C-4374-80DC-AB36C7F6AA1F}"
 	ProjectSection(SolutionItems) = preProject
 		globalsettings.json = globalsettings.json
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{EDA1CE46-36E7-4EE9-BD6E-33080BDE774A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,6 +40,10 @@ Global
 		{EF7EA73F-8C1C-45F8-A7B3-A1C51F7B3DF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EF7EA73F-8C1C-45F8-A7B3-A1C51F7B3DF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EF7EA73F-8C1C-45F8-A7B3-A1C51F7B3DF8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EDA1CE46-36E7-4EE9-BD6E-33080BDE774A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDA1CE46-36E7-4EE9-BD6E-33080BDE774A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDA1CE46-36E7-4EE9-BD6E-33080BDE774A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDA1CE46-36E7-4EE9-BD6E-33080BDE774A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
