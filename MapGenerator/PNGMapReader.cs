@@ -1,9 +1,7 @@
 ﻿using MapGenerator.Structures;
 using Newtonsoft.Json;
 using Shared.Configuration;
-using Shared.Definitions;
 using Shared.Map;
-using StaticFilesIO;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -17,11 +15,9 @@ namespace MapGenerator
         private const string HEADER_EXTENSION = ".json";
         private readonly string _mapName;
         private readonly string _mapDirectory;
-        private readonly TStaticDefinitions _definitions;
 
         public PNGMapReader(string mapName)
         {
-            _definitions = DefinitionsReader.Import();
             _mapName = mapName;
             _mapDirectory = Path.Combine(ConfigurationInstance.Config.StoragePaths.DevStatic, _mapName);
         }
