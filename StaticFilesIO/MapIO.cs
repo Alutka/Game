@@ -2,14 +2,15 @@
 using Shared.Map;
 using Shared.Structures;
 using System.IO;
+using System.Text;
 
 namespace StaticFilesIO
 {
     public static class MapIO
     {
-        public static void Export(TMap map, Stream stream)
+        public static void Export(TMap map, Stream stream, bool leaveOpen = false)
         {
-            using (BinaryWriter writer = new BinaryWriter(stream))
+            using (BinaryWriter writer = new BinaryWriter(stream, Encoding.Default, leaveOpen))
             {
                 writer.Write(map.Name);
                 writer.Write(map.Layers.Length);
