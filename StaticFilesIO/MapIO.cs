@@ -1,4 +1,5 @@
 ﻿using Shared;
+using Shared.Interfaces;
 using Shared.Map;
 using Shared.Structures;
 using System.IO;
@@ -13,10 +14,11 @@ namespace StaticFilesIO
             using (BinaryWriter writer = new BinaryWriter(stream, Encoding.Default, leaveOpen))
             {
                 writer.Write(map.Name);
-                writer.Write(map.Layers.Length);
-                for (int i = 0; i < map.Layers.Length; i++)
+                WriteLayer(writer, map.BiomeLayer);
+                writer.Write(map.ResourceLayers.Length);
+                for (int i = 0; i < map.ResourceLayers.Length; i++)
                 {
-                    WriteLayer(writer, map.Layers[i]);
+                    WriteLayer(writer, map.ResourceLayers[i]);
                 }
             }
         }
@@ -26,13 +28,14 @@ namespace StaticFilesIO
             using (BinaryReader reader = new BinaryReader(stream))
             {
                 string name = reader.ReadString();
+                TMapLayer biomeLayer = ReadLayer(reader);
                 int layersCount = reader.ReadInt32();
                 var layers = new TMapLayer[layersCount];
                 for (int i = 0; i < layersCount; i++)
                 {
                     layers[i] = ReadLayer(reader);
                 }
-                return new TMap() { Name = name, Layers = layers };
+                return new TMap() { Name = name, ResourceLayers = layers, BiomeLayer = biomeLayer };
             }
         }
 
@@ -62,7 +65,7 @@ namespace StaticFilesIO
             return new TEnum(names);
         }
 
-        private static void WriteLayer(BinaryWriter writer, TMapLayer layer)
+        private static void WriteLayer(BinaryWriter writer, IMapLayer layer)
         {
             writer.Write((int)layer.Type);
             writer.Write(layer.Width);

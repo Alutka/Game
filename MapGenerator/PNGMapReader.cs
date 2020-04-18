@@ -1,5 +1,6 @@
 ﻿using MapGenerator.Structures;
 using Newtonsoft.Json;
+using Shared;
 using Shared.Configuration;
 using Shared.Map;
 using System;
@@ -23,7 +24,8 @@ namespace MapGenerator
 
         public TMap ReadMap()
         {
-            List<TMapLayer> mapLayers = new List<TMapLayer>();
+            List<TMapLayer> resourceLayers = new List<TMapLayer>();
+            List<TMapLayer> biomeLayers = new List<TMapLayer>();
             IEnumerable<string> layerNames = Directory.GetFiles(_mapDirectory).Select(name => Path.GetFileNameWithoutExtension(name)).Distinct();
             foreach (var layerName in layerNames)
             {
@@ -31,16 +33,30 @@ namespace MapGenerator
                 var bitmap = new Bitmap(Path.Combine(_mapDirectory, layerName + ".png"), true);
                 var layerReader = new PNGMapLayerReader(bitmap, header);
                 TMapLayer layer = layerReader.ReadLayer();
-                mapLayers.Add(layer);
+                switch (layer.Type)
+                {
+                    case DefinitionType.Biome:
+                        biomeLayers.Add(layer);
+                        break;
+                    case DefinitionType.Resource:
+                        resourceLayers.Add(layer);
+                        break;
+                    default:
+                        throw new InvalidDataException($"Invalid layer type {layer.Type}");
+                }
             }
-            ValidateLayers(mapLayers);
-            return new TMap() { Name = _mapName, Layers = mapLayers.ToArray() };
+            ValidateLayers(resourceLayers, biomeLayers);
+            return new TMap() { Name = _mapName, ResourceLayers = resourceLayers.ToArray(), BiomeLayer = biomeLayers.First() };
         }
 
-        private void ValidateLayers(List<TMapLayer> mapLayers)
+        private void ValidateLayers(List<TMapLayer> mapLayers, List<TMapLayer> biomeLayers)
         {
-            var layersHeights = mapLayers.Select(m => m.Height);
-            var layersWidths = mapLayers.Select(m => m.Width);
+            if (biomeLayers.Count() != 1)
+            {
+                throw new Exception("Only one biome layer allowed!");
+            }
+            var layersHeights = mapLayers.Select(m => m.Height).Union(biomeLayers.Select(b => b.Height));
+            var layersWidths = mapLayers.Select(m => m.Width).Union(biomeLayers.Select(b => b.Width));
             if (layersHeights.Distinct().Count() != 1 || layersWidths.Distinct().Count() != 1)
             {
                 throw new Exception("Layers have different sizes!");

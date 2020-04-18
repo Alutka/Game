@@ -15,9 +15,7 @@ namespace Shared.Structures
 
         public int GetKey(string value)
         {
-            var result = Array.IndexOf(_values, value);
-            if (result < 0) throw new InvalidCastException($"{value} does not exist!");
-            return result;
+            return Array.IndexOf(_values, value);
         }
 
         public string GetValue(int key) => _values[key];
