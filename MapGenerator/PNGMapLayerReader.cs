@@ -32,19 +32,14 @@ namespace MapGenerator
             int length = _bitmap.Width * _bitmap.Height;
             int[] layerValues = new int[length];
             int index = 0;
-            for (int row = 0; row < _bitmap.Width; row++)
+            for (int y = 0; y < _bitmap.Height; y++)
             {
-                for (int col = 0; col < _bitmap.Height; col++)
+                for (int x = 0; x < _bitmap.Width; x++)
                 {
-                    layerValues[index++] = TranslateColor(_bitmap.GetPixel(row, col));
+                    layerValues[index++] = TranslateColor(_bitmap.GetPixel(x, y));
                 }
             }
-            return new TMapLayer()
-            {
-                Type = _layerType,
-                Values = layerValues,
-                LayerEnum = _enum
-            };
+            return new TMapLayer(_bitmap.Width, _bitmap.Height, layerValues, _enum, _layerType);
         }
 
         private int TranslateColor(Color pixel)

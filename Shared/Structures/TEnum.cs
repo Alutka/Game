@@ -6,6 +6,8 @@ namespace Shared.Structures
     {
         private readonly string[] _values;
 
+        public int Length => _values.Length;
+
         public TEnum(string[] values)
         {
             _values = values;

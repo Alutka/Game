@@ -1,6 +1,7 @@
 ﻿using Shared;
 using Shared.Configuration;
 using Shared.Map;
+using Shared.Structures;
 using System.IO;
 
 namespace StaticFilesIO
@@ -31,7 +32,7 @@ namespace StaticFilesIO
                 writer.Write(map.Layers.Length);
                 for (int i = 0; i < map.Layers.Length; i++)
                 {
-                    WriteLayer(writer, map.Layers[i], map.Height * map.Width);
+                    WriteLayer(writer, map.Layers[i]);
                 }
             }
         }
@@ -48,7 +49,7 @@ namespace StaticFilesIO
                 var layers = new TMapLayer[layersCount];
                 for (int i = 0; i < layersCount; i++)
                 {
-                    layers[i] = ReadLayer(reader, height * width);
+                    layers[i] = ReadLayer(reader);
                 }
                 return new TMap() { Name = name, Height = height, Width = width, Layers = layers };
             }
@@ -59,19 +60,22 @@ namespace StaticFilesIO
             return Path.Combine(_mapDirectory, mapName + _mapExtension);
         }
 
-        private TMapLayer ReadLayer(BinaryReader reader, int length)
+        private TMapLayer ReadLayer(BinaryReader reader)
         {
             DefinitionType type = (DefinitionType)reader.ReadInt32();
+            int width = reader.ReadInt32();
+            int height = reader.ReadInt32();
+            int length = width * height;
             int[] values = new int[length];
             for (int i = 0; i < length; i++)
             {
                 values[i] = reader.ReadInt32();
             }
-            TLayerEnum layerEnum = ReadLayerEnum(reader);
-            return new TMapLayer() { Type = type, Values = values, LayerEnum = layerEnum };
+            TEnum layerEnum = ReadLayerEnum(reader);
+            return new TMapLayer(width, height, values, layerEnum, type);
         }
 
-        private TLayerEnum ReadLayerEnum(BinaryReader reader)
+        private TEnum ReadLayerEnum(BinaryReader reader)
         {
             int length = reader.ReadInt32();
             string[] names = new string[length];
@@ -79,25 +83,27 @@ namespace StaticFilesIO
             {
                 names[i] = reader.ReadString();
             }
-            return new TLayerEnum(names);
+            return new TEnum(names);
         }
 
-        private void WriteLayer(BinaryWriter writer, TMapLayer layer, int length)
+        private void WriteLayer(BinaryWriter writer, TMapLayer layer)
         {
             writer.Write((int)layer.Type);
-            for (int i = 0; i < length; i++)
+            writer.Write(layer.Width);
+            writer.Write(layer.Height);
+            for (int i = 0; i < layer.Width * layer.Height; i++)
             {
                 writer.Write(layer.Values[i]);
             }
             WriteLayerEnum(writer, layer.LayerEnum);
         }
 
-        private void WriteLayerEnum(BinaryWriter writer, TLayerEnum layerEnum)
+        private void WriteLayerEnum(BinaryWriter writer, TEnum layerEnum)
         {
             writer.Write(layerEnum.Length);
             for (int i = 0; i < layerEnum.Length; i++)
             {
-                writer.Write(layerEnum.GetName(i));
+                writer.Write(layerEnum.GetValue(i));
             }
         }
     }
