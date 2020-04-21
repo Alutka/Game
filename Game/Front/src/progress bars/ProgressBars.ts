@@ -92,4 +92,4 @@ const progressBar2 = new ProgressBar("carriage", "icon fas fa-weight-hanging", "
 setTimeout(()=>{
     progressBar2.update(60, 0, 200, "pink")
 },3000);
-const progressBar3 = new ProgressBar("effort", "icon fas fa-hammer", "yellow", 7.22, 0, 12).display();
+const progressBar3 = new ProgressBar("effort", "icon fas fa-hammer", "yellow", 88.88, 0, 88).display();
