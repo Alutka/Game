@@ -4,6 +4,10 @@
 /**/bin/**
 /**/obj/**
 /**/.vs/**
+Game/Front/src/**/*.js
+Game/Front/src/**/*.js.map
+Game/Front/*.css
+Game/Front/*.css.map
 Game/wwwroot/dist
 Game/wwwroot/*.css
 
