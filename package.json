@@ -1,0 +1,17 @@
+{
+  "name": "gra",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "@types/node": "^13.13.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "tsc && node dist/index.js",
+    "dev": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/index.ts",
+    "build": "tsc --build Game/Front/tsconfig.json && browserify Game/wwwroot/dist/index.js > Game/wwwroot/index.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
