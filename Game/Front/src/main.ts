@@ -5,3 +5,9 @@ fetch("api/characters",
     }).then(a => {
         console.log(a.text())
     });
+
+// declare module "./main/main" {
+//     interface TreeContext {
+//         serieVisibility(): SerieVisibility;
+//     }
+// }
