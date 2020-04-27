@@ -1,6 +1,6 @@
 import {createDocumentFragmentFromString} from "../utils/utils";
 
-export class ProgressBar {
+export class MiniProgressBar {
     private id: string;
     private iconClassname: string;
     private min: number;
@@ -11,7 +11,7 @@ export class ProgressBar {
     private valueContainer: HTMLElement;
 
     constructor(id: string, iconClassname: string, color: string, value: number, min: number, max: number) {
-        this.id = `${id}-progress-bar`;
+        this.id = `${id}-progress-bar-mini`;
         this.iconClassname = iconClassname;
         this.value = value;
         this.min = min;
@@ -20,7 +20,7 @@ export class ProgressBar {
     }
 
     public display() {
-        const container = document.getElementById("progress_bars");
+        const container = document.getElementById("mini_progress_bars");
         const progressBarWrapper = document.createElement("div");
         progressBarWrapper.classList.add("progress_bar_wrapper");
         progressBarWrapper.id = `${this.id}-wrapper`;
@@ -87,9 +87,9 @@ function getProgressBarTemplate(id: string, value: number, min: number, max: num
 </div>`
 }
 
-const progressBar1 = new ProgressBar("food", "icon fas fa-utensils", "yellow", 50, 0, 100).display();
-const progressBar2 = new ProgressBar("carriage", "icon fas fa-weight-hanging", "yellow", 70, 0, 100).display();
+const progressBar1 = new MiniProgressBar("food", "icon fas fa-utensils", "yellow", 50, 0, 100).display();
+const progressBar2 = new MiniProgressBar("carriage", "icon fas fa-weight-hanging", "yellow", 70, 0, 100).display();
 setTimeout(()=>{
     progressBar2.update(60, 0, 200, "pink")
 },3000);
-const progressBar3 = new ProgressBar("effort", "icon fas fa-hammer", "yellow", 88.88, 0, 88).display();
+const progressBar3 = new MiniProgressBar("effort", "icon fas fa-hammer", "yellow", 88.88, 0, 88).display();
