@@ -4,4 +4,4 @@ export function createDocumentFragmentFromString(markup: string): DocumentFragme
     console.log("CREATING MARKUP");
     return template.content;
 };
- console.log("UTILS");
+ console.log("UTILS 2");
